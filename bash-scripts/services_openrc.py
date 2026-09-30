@@ -36,7 +36,9 @@ def enable_at_boot(service_name):
 def disable_at_boot(service_name):
     if service_name in services:
         subprocess.run(["rc-update", "del", service_name, "default"])
-        print(f"Service {service_name} disabled at boot.")  
+        print(f"Service {service_name} disabled at boot.")
+def show_all_services():
+    subprocess.run(["rc-status", "--all"]) 
 print("************ Service Management Menu **********")
 if __name__ == "__main__":
     while True:
@@ -48,7 +50,8 @@ if __name__ == "__main__":
         print("6. Restart Service")
         print("7. Enable Service at Boot")
         print("8. Disable Service at Boot")
-        print("9. Exit")
+        print("9. Show All Services")
+        print("10. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -77,6 +80,8 @@ if __name__ == "__main__":
             service_name = input("Enter the service name to disable at boot: ")
             disable_at_boot(service_name)
         elif choice == "9":
+            show_all_services()
+        elif choice == "10":    
             break
         else:
             print("Invalid choice. Please try again.")
